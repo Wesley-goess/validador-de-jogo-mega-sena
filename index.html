@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="quatro-folhas.ico" type="image/x-icon">
+    <title>Validador de Jogo da Mega-Sena</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Validador de Jogo da Mega-Sena</h1>
+        <!-- Campos de entrada de números -->
+        <div>
+            <input type="number" id="num1" placeholder="1º" min="1" max="60" oninput="limitInput(this)">
+            <input type="number" id="num2" placeholder="2º" min="1" max="60" oninput="limitInput(this)">
+            <input type="number" id="num3" placeholder="3º" min="1" max="60" oninput="limitInput(this)">
+            <input type="number" id="num4" placeholder="4º" min="1" max="60" oninput="limitInput(this)">
+            <input type="number" id="num5" placeholder="5º" min="1" max="60" oninput="limitInput(this)">
+            <input type="number" id="num6" placeholder="6º" min="1" max="60" oninput="limitInput(this)">
+        </div>
+        <!-- Botões -->
+        <div class="buttons">
+            <button class="validate" onclick="validateGame()">Validar Jogo</button>
+            <button class="reset" onclick="resetFields()">Resetar</button>
+            <button onclick="toggleRules()">Regras</button>
+            <button onclick="toggleVolante()">Abrir Volante</button>
+        </div>
+        <!-- Regras -->
+        <div id="rules">
+            <p>1) Cada número deve estar entre 1 e 60.</p>
+            <p>2) Não pode haver números repetidos.</p>
+            <p>3) A soma dos números deve estar entre 100 e 267.</p>
+            <p>4) Mínima 0 e Máximo de 4 números primos. Os Números Primos existentes na MegaSena são: 02, 03, 05, 07, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59.</p>
+            <p>5) Mínima 0 e máximo de 4 números múltiplos de 3. Os Números Múltiplos existentes na MegaSena são: 03, 06, 09, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60.</p>
+            <p>6) Combinação válida de pares e ímpares: 3x3, 4x2 ou 2x4.</p>
+            <p>7) Mínima 0 e Máximo de 3 números de Fibonacci. Os números de Fibonacci existentes na MegaSena são: 1, 2, 3, 5, 8, 13, 21, 34, 55.</p>
+            <p>8) Mínima 0 e Máximo de 4 números triangulares. Os números triangulares existentes na MegaSena são: 1, 3, 6, 10, 15, 21, 28, 36, 45, 55.</p>
+            <p>9) Mínima 0 e Máximo de 2 números quadrados perfeitos. Os números quadrados perfeitos na MegaSena são: 1, 4, 9, 16, 25, 36, 49.</p>
+            <p>10) Quantas linhas horizontais são usadas na mega 3,4 e 5
+Sem usar: 1,2 ou 3 (de 1 a 4 nuemros na mesma linha)</p>
+            <p>11) Colunas vestical usadas: 4,5 ou 6
+As colunas não usadas: 4,5 ou 6 (de 1 a 3 numeros na mesma coluna)</p>
+            <p>12) nao coloque todos numeros no mesmo quadrante</p>
+            <p>13) evite jogos depetidos, nao faça jogos com mais de 4 numeros que ja ocorream pois é muito dificil de acontecer um jogo quase repetido</p>
+        </div>
+        <!-- Volante da Mega-Sena -->
+        <div id="volante" style="display: none;">
+            <h2>Selecione os Números:</h2>
+            <div class="grid">
+                <!-- Geração automática de botões numerados de 1 a 60 -->
+                <script>
+                    document.write(Array.from({ length: 60 }, (_, i) => 
+                        `<button class="volante-button" onclick="toggleNumber(this)">${i + 1}</button>`
+                    ).join(''));
+                </script>
+            </div>
+             <div class="line vertical"></div>
+    <div class="line horizontal"></div>
+            <div class="volante-buttons">
+                <button onclick="confirmSelection()">Confirmar</button>
+                <button onclick="clearSelection()">Limpar Seleção</button>
+            </div>
+        </div>
+        <!-- Resultados -->
+        <div class="result" id="result"></div>
+        <div class="details" id="details"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
